@@ -28,13 +28,12 @@ test:
     - json_merge_patch
     - json_merge_patch.cli
     - json_merge_patch.lib
-  source_files:
-    - json_merge_patch
-  requires:
-    - pip
   commands:
     - pip check
-    - python -m unittest -v json_merge_patch/tests.py
+    - pytest -v ${SP_DIR}/json_merge_patch/tests.py
+  requires:
+    - pip
+    - pytest
 
 about:
   home: https://github.com/OpenDataServices/json-merge-patch
