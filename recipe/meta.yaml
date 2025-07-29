@@ -30,7 +30,8 @@ test:
     - json_merge_patch.lib
   commands:
     - pip check
-    - pytest -v ${SP_DIR}/json_merge_patch/tests.py
+    - pytest -v ${SP_DIR}/json_merge_patch/tests.py  # [unix]
+    - pytest -v %SP_DIR%/json_merge_patch/tests.py  # [win]
   requires:
     - pip
     - pytest
