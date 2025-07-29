@@ -1,39 +1,52 @@
 {% set name = "json-merge-patch" %}
-{% set version = "0.2" %}
+{% set version = "0.3.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 09898b6d427c08754e2a97c709cf2dfd7e28bd10c5683a538914975eab778d39
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 4a022d78fc2f09cb49d96c646efc380d3b5ead2b5c7dabe22c3928c2c2e9c4e0
 
 build:
-  noarch: python
+  skip: true # [py<39]
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --verbose"
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - python
     - pip
+    - wheel
+    - setuptools
   run:
     - python
 
 test:
   imports:
+    - json_merge_patch
     - json_merge_patch.cli
+    - json_merge_patch.lib
+  source_files:
+    - json_merge_patch
+  requires:
+    - pip
+  commands:
+    - pip check
+    - python -m unittest -v json_merge_patch/tests.py
 
 about:
   home: https://github.com/OpenDataServices/json-merge-patch
-  license: Apache 2.0
-  summary: 'json-merge-patch library provides functions to merge json in accordance with https://tools.ietf.org/html/rfc7386'
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Provides functions to merge json in accordance with RFC 7386
 
   description: |
     json-merge-patch library provides functions to merge json in
-    accordance with https://tools.ietf.org/html/rfc7386
-  doc_url: https://tools.ietf.org/html/rfc7386
+    accordance with https://datatracker.ietf.org/doc/html/rfc7386
+  doc_url: https://datatracker.ietf.org/doc/html/rfc7386
   dev_url: https://github.com/OpenDataServices/json-merge-patch
 
 extra:
