@@ -46,7 +46,7 @@ about:
   description: |
     json-merge-patch library provides functions to merge json in
     accordance with https://datatracker.ietf.org/doc/html/rfc7386
-  doc_url: https://datatracker.ietf.org/doc/html/rfc7386
+  doc_url: https://github.com/OpenDataServices/json-merge-patch
   dev_url: https://github.com/OpenDataServices/json-merge-patch
 
 extra:
